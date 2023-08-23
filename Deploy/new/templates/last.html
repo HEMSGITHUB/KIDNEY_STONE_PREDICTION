@@ -1,0 +1,56 @@
+{% extends 'new/base.html' %}
+{% load static %}
+
+{% block content %}
+<body>
+    <div>
+		<div style="background-color: #e9ecef;">
+		    <a class="navbar-brand text-dark" style="margin-left: 30px;" href="{% url 'details_all' %}">All</a>
+		    <a class="navbar-brand text-dark" style="margin-left: 10px;" href="{% url 'details_last' %}">Last</a>
+	    </div>
+        <br>
+        <center>
+        <div class="feed_table">
+            <table class="table" border="default" style="table-layout: fixed;">
+            <tr>
+                <th>gravity</th><th>ph</th><th>osmo</th>
+                <th>cond</th><th>urea</th><th>calc</th>
+                <th>target</th>
+            </tr>
+                <tr>
+                    <td>{{model.gravity}}</td><td>{{model.ph}}</td>
+                    <td>{{model.osmo}}</td><td>{{model.cond}}</td>
+                    <td>{{model.urea}}</td><td>{{model.calc}}</td>
+                    <td>{{model.target}}</td>
+                </tr>    
+            </table>
+        </div>
+        </center>
+        <br><br>
+        <div>
+        <center>
+            <form action="{% url 'details_last' %}" method="POST">
+                {% csrf_token %}
+                {% for f in form %}
+                <p>
+                    {{ f.label_tag }}<br>
+                    {{ f }}
+                    
+                </p>
+                {% endfor %}
+                <br>
+            
+                {% if not msg %}
+                    <input type="submit">
+                {% else %}
+                    {{msg}}
+                {% endif %}
+            
+            </form>
+        </center>
+        </div>
+        
+        
+{% endblock content %}
+</body>
+</html>

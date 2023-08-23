@@ -1,0 +1,59 @@
+{% extends 'new/base.html' %}
+{% load static %}
+
+<style>
+	.white{
+	color:white;
+
+</style>
+	
+	{% block content %}
+	<body class="index">
+	<div>
+		<div style="background-color: #e9ecef;">
+		<a class="navbar-brand text-dark" style="margin-left: 30px;" href="{% url 'apredict' %}">Enter Details</a>
+		<a class="navbar-brand text-dark" style="margin-left: 720px;" href="{% url 'feedback' %}">Feedback</a>
+	</div><br>
+	<h1 style="text-align:center; color:white;"><b>KIDNEY STONE PREDICTION</b></h1>
+     <!-- Main Input For Receiving Query to our ML -->
+
+	 <form class="form1 container1" action="{% url 'predict' %}" style="background-color: transparent; box-sizing: border-box;
+	 font-family: proxima_nova_rgregular, Helvetica, Arial, sans-serif;" method="POST">
+	 {% csrf_token %}
+		 <fieldset class="fieldset1">
+			 <legend class="legend1">Enter the Detail</legend>
+
+	 <label class="white"  for=""> SPECIFIC GRAVITY </label>
+	 <input type="number" class="space form-control" step="0.01" name="gravity" placeholder="mg/dl" required="required" /><br><br>
+
+	 <label class="white"  for=""> pH </label>
+	 <input type="number" class="space form-control" step="0.01" name="ph" placeholder="pH" required="required" /><br><br>
+
+	 <label class="white"  for=""> OSMOLARITY </label>
+	 <input type="number" class="space form-control" step="0.01" name="osmo" placeholder="Osmolarity" required="required" /><br><br>
+
+	 <label class="white"  for=""> CONDUCTIVITY </label>
+	 <input type="number" class="space form-control" step="0.01" name="cond" placeholder="conductivity" required="required" /><br><br>
+
+	 <label class="white"  for=""> UREA </label>
+	 <input type="number" class="space form-control" step="0.01" name="urea" placeholder="mg/dl" required="required" /><br><br>
+
+	 <label class="white"  for=""> CALCIUM CONCENTRATION </label>
+	 <input type="number" class="space form-control" step="0.01" name="calc" placeholder="mg/dl" required="required" /><br><br>
+
+	 <input type="hidden" name="target" value="data">
+	 <input class="input1" type="submit" value="Submit"><br>
+		 </fieldset>
+	 </form>
+
+
+   <br>
+   <br>
+<div  style="background:skyblue;padding:2% 40%">
+   {{ prediction_text }}
+</div>
+ </div>
+
+ {% endblock content %}
+</body>
+</html>
